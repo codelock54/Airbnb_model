@@ -7,10 +7,9 @@ COPY . /app
 #RUN mkdir -p /home/app 
 RUN pip install --upgrade pip 
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt 
 #--no-cache-dir
 RUN pip install jupyter
-
 
 EXPOSE 8888
 
