@@ -1,13 +1,19 @@
-FROM jupyter/scipy-notebook
+#FROM jupyter/datascience-notebook
+FROM python:3.8-slim-buster
 
-WORKDIR /mydata
+WORKDIR /app
 
-RUN pip install joblib
+COPY . /app
+#RUN mkdir -p /home/app 
+RUN pip install --upgrade pip 
 
-COPY train.csv ./train.csv
-COPY test.csv ./test.csv
+RUN pip install -r requirements.txt
+#--no-cache-dir
+RUN pip install jupyter
 
-COPY train.py ./train.py
-COPY inference.py ./inference.py
 
-RUN python3 train.py
+EXPOSE 8888
+
+#CMD ["jupyter", "notebook"]
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+

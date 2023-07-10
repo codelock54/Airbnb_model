@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+
+  model:
+    build: .
+    ports: 
+      - "8888:8888"
+    links: 
+      - mongodb
+    container_name: C-model
+    
+  mongodb:
+    image: mongo
+    
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb_data:/data/db
+    container_name:  C-mongodb
+
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=martin
+      - MONGO_INITDB_ROOT_PASSWORD=pasword
+    
+
+volumes:
+  mongodb_data:
+  
+
